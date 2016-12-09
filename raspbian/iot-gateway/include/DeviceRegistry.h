@@ -17,7 +17,7 @@ class DeviceRegistry
 
         void loadKnownDevices();
         void reset();
-        void connectNext(ICommunicator* pCommunicator);
+        t_device_id connectNext(ICommunicator* pCommunicator);
     protected:
     private:
         t_devices_list _devices;

@@ -57,21 +57,22 @@
 1471620346 /home/philip/projects/iot/raspbian/iot-gateway/include/bcm2835.h
 	<stdint.h>
 
-1481319799 source:/home/philip/projects/iot/raspbian/iot-gateway/src/DeviceRegistry.cpp
+1481322335 source:/home/philip/projects/iot/raspbian/iot-gateway/src/DeviceRegistry.cpp
 	"DeviceRegistry.h"
-	<unistd.h>
 
-1481318383 /home/philip/projects/iot/raspbian/iot-gateway/include/DeviceRegistry.h
+1481322261 /home/philip/projects/iot/raspbian/iot-gateway/include/DeviceRegistry.h
 	<list>
 	"deviceinfo.h"
 	"ICommunicator.h"
 
-1481313675 /home/philip/projects/iot/raspbian/iot-gateway/include/deviceinfo.h
+1481322317 /home/philip/projects/iot/raspbian/iot-gateway/include/deviceinfo.h
 	<stdint.h>
 
-1481319220 source:/home/philip/projects/iot/raspbian/iot-gateway/src/main.cpp
+1481322607 source:/home/philip/projects/iot/raspbian/iot-gateway/src/main.cpp
 	<iostream>
 	<unistd.h>
+	<signal.h>
+	<inttypes.h>
 	"DeviceRegistry.h"
 	"RF24Communicator.h"
 

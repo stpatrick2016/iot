@@ -1,5 +1,4 @@
 #include "DeviceRegistry.h"
-#include <unistd.h>
 
 DeviceRegistry::DeviceRegistry()
 {
@@ -13,10 +12,11 @@ DeviceRegistry::~DeviceRegistry()
 
 void DeviceRegistry::loadKnownDevices()
 {
-    DeviceInfo* pDevice = new DeviceInfo();
-    pDevice->remote_pipe = 0xEDEDEDED01LL;
-    pDevice->local_pipe = 0xFDADADAD02LL;
-    _devices.push_back(pDevice);
+    _devices.push_back(new DeviceInfo(1, 0xEDEDEDED01LL, 0xFDADADAD02LL));
+    _devices.push_back(new DeviceInfo(2, 0xEDEDEDED01LL, 0x1212121201LL));
+    _devices.push_back(new DeviceInfo(3, 0xEDEDEDED01LL, 0x2212121201LL));
+    _devices.push_back(new DeviceInfo(4, 0xEDEDEDED01LL, 0x3212121201LL));
+    _devices.push_back(new DeviceInfo(5, 0xEDEDEDED01LL, 0x4212121201LL));
 }
 
 void DeviceRegistry::reset()
@@ -29,8 +29,9 @@ void DeviceRegistry::reset()
     _devices.clear();
 }
 
-void DeviceRegistry::connectNext(ICommunicator* pCommunicator)
+t_device_id DeviceRegistry::connectNext(ICommunicator* pCommunicator)
 {
+    t_device_id ret = 0;
     if(!_devices.empty())
     {
         if(_currentlyConnected == _devices.end())
@@ -39,10 +40,12 @@ void DeviceRegistry::connectNext(ICommunicator* pCommunicator)
         }
 
         DeviceInfo* pDevice = *_currentlyConnected;
+        ret = pDevice->Id;
         pCommunicator->connectWrite(pDevice->remote_pipe);
         pCommunicator->connectRead(pDevice->local_pipe);
-        usleep(1000);
 
         _currentlyConnected++;
     }
+
+    return ret;
 }
