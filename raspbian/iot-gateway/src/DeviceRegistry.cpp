@@ -1,8 +1,9 @@
 #include "DeviceRegistry.h"
+#include <unistd.h>
 
 DeviceRegistry::DeviceRegistry()
 {
-    //ctor
+    _currentlyConnected = _devices.begin();
 }
 
 DeviceRegistry::~DeviceRegistry()
@@ -26,4 +27,22 @@ void DeviceRegistry::reset()
     }
 
     _devices.clear();
+}
+
+void DeviceRegistry::connectNext(ICommunicator* pCommunicator)
+{
+    if(!_devices.empty())
+    {
+        if(_currentlyConnected == _devices.end())
+        {
+            _currentlyConnected = _devices.begin();
+        }
+
+        DeviceInfo* pDevice = *_currentlyConnected;
+        pCommunicator->connectWrite(pDevice->remote_pipe);
+        pCommunicator->connectRead(pDevice->local_pipe);
+        usleep(1000);
+
+        _currentlyConnected++;
+    }
 }

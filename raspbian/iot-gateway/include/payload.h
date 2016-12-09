@@ -1,6 +1,8 @@
 #ifndef PAYLOAD_H_INCLUDED
 #define PAYLOAD_H_INCLUDED
 
+#include <stdint.h>
+
 enum PayloadType{
     METEO
 };

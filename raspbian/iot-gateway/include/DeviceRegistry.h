@@ -3,6 +3,7 @@
 
 #include <list>
 #include "deviceinfo.h"
+#include "ICommunicator.h"
 
 using namespace std;
 
@@ -16,9 +17,11 @@ class DeviceRegistry
 
         void loadKnownDevices();
         void reset();
+        void connectNext(ICommunicator* pCommunicator);
     protected:
     private:
         t_devices_list _devices;
+        t_devices_list::iterator _currentlyConnected;
 };
 
 #endif // DEVICEREGISTRY_H
