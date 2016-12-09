@@ -1,6 +1,6 @@
 #include <iostream>
 #include <unistd.h>
-#include "RF24/RF24.h"
+#include "RF24.h"
 #include "payload.h"
 
 using namespace std;
