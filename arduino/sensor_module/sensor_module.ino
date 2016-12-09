@@ -5,7 +5,7 @@
 
 
 Payload msg;
-const uint64_t pipe = 0xFDADADAD02LL;
+const uint64_t pipes[] = {0xFDADADAD02LL, 0x1212121201LL, 0x2212121201LL, 0x3212121201LL, 0x4212121201LL};
 const unsigned long timeoutPeriod = 3000;
 RF24 radio(9,10);
 FILE serial_stdout;
@@ -31,24 +31,27 @@ void setup() {
   radio.setAutoAck(1);
   radio.setRetries(2,15);
   radio.setPayloadSize(sizeof(msg));
-  radio.openWritingPipe(pipe);
   //radio.startListening();
   radio.printDetails();
   radio.powerUp();
 }
 
 void loop() {
-  msg.type = PayloadType::METEO;
-  msg.data.meteo.temperature = 32;
-  Serial.print("Sending temperature... ");
-  if(radio.write(&msg, sizeof(msg)))
-  {
-    printf("ok\n");
-  }
-  else
-  {
-    printf("fail\n");
-  }
 
+  for(int i=0; i<(sizeof(pipes) / sizeof(uint64_t)); i++)
+  {
+    msg.type = PayloadType::METEO;
+    msg.data.meteo.temperature = 32;
+    printf("Sending temperature to %d... ", i);
+    radio.openWritingPipe(pipes[i]);
+    if(radio.write(&msg, sizeof(msg)))
+    {
+      printf("ok\n");
+    }
+    else
+    {
+      printf("fail\n");
+    }
+  }
   delay(2000);
 }
