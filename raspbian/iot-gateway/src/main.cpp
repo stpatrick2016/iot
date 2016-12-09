@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include "RF24.h"
 #include "payload.h"
+#include "DeviceRegistry.h"
 
 using namespace std;
 
@@ -10,8 +11,9 @@ RF24 radio(RPI_V2_GPIO_P1_15, RPI_V2_GPIO_P1_24, BCM2835_SPI_SPEED_8MHZ);
 const uint64_t pipes[2] = {0xFDADADAD01LL, 0xFDADADAD02LL};
 
 Payload payload = Payload();
+DeviceRegistry devices;
 
-void setup(void)
+void initializeRadio(void)
 {
     radio.begin();
     radio.setRetries(15,15);
@@ -34,7 +36,6 @@ void loop(void)
         printf("Reading data from pipe %d\n", pipeNum);
         radio.read(&payload, sizeof(payload));
         printf("packet %d \n", payload.data.meteo.temperature);
-        fflush(stdout);
     }
     else
     {
@@ -45,8 +46,10 @@ void loop(void)
 int main()
 {
     int exitCode = 0;
-    try{
-        setup();
+    try
+    {
+        devices.loadKnownDevices();
+        initializeRadio();
         while(1)
         {
             loop();
@@ -55,11 +58,15 @@ int main()
     catch(exception& e)
     {
         cout << e.what() << '\n';
+        exitCode = -1;
     }
     catch(...)
     {
         cout << "FATAL Error \n";
         exitCode = -1;
     }
+
+    devices.reset();
+
     return exitCode;
 }
