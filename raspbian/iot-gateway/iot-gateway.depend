@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1481297658 source:/home/philip/projects/iot/raspbian/iot-gateway/main.cpp
+	<iostream>
+	<unistd.h>
+	"RF24/RF24.h"
+	"payload.h"
+
+1481297664 /home/philip/projects/iot/raspbian/iot-gateway/payload.h
+
+1470080660 source:/home/philip/projects/iot/raspbian/iot-gateway/RF24.cpp
+	"./RF24_config.h"
+	"./RF24.h"
+	"./nRF24L01.h"
+
+1470080660 /home/philip/projects/iot/raspbian/iot-gateway/RF24_config.h
+	<stdint.h>
+	<stdio.h>
+	<time.h>
+	<string.h>
+	<sys/time.h>
+	<stddef.h>
+	"bcm2835.h"
+
+1471620346 /home/philip/projects/iot/raspbian/iot-gateway/bcm2835.h
+	<stdint.h>
+
+1470080660 /home/philip/projects/iot/raspbian/iot-gateway/RF24.h
+	"RF24_config.h"
+	"./bcm2835.h"
+
+1470080660 /home/philip/projects/iot/raspbian/iot-gateway/nRF24L01.h
+
+1470080660 source:/home/philip/projects/iot/raspbian/iot-gateway/bcm2835.c
+	<stdlib.h>
+	<stdio.h>
+	<errno.h>
+	<fcntl.h>
+	<sys/mman.h>
+	<string.h>
+	<sys/time.h>
+	<time.h>
+	<unistd.h>
+	"bcm2835.h"
+
