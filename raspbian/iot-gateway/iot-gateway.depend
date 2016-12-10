@@ -57,7 +57,7 @@
 1471620346 /home/philip/projects/iot/raspbian/iot-gateway/include/bcm2835.h
 	<stdint.h>
 
-1481398833 source:/home/philip/projects/iot/raspbian/iot-gateway/src/DeviceRegistry.cpp
+1481405905 source:/home/philip/projects/iot/raspbian/iot-gateway/src/DeviceRegistry.cpp
 	"DeviceRegistry.h"
 
 1481322261 /home/philip/projects/iot/raspbian/iot-gateway/include/DeviceRegistry.h
@@ -68,7 +68,7 @@
 1481322317 /home/philip/projects/iot/raspbian/iot-gateway/include/deviceinfo.h
 	<stdint.h>
 
-1481364927 source:/home/philip/projects/iot/raspbian/iot-gateway/src/main.cpp
+1481405982 source:/home/philip/projects/iot/raspbian/iot-gateway/src/main.cpp
 	<iostream>
 	<unistd.h>
 	<signal.h>
@@ -99,16 +99,15 @@
 
 1470080660 /home/philip/projects/iot/raspbian/iot-gateway/include/nRF24L01.h
 
-1481398151 /home/philip/projects/iot/raspbian/iot-gateway/include/RF24Communicator.h
+1481400144 /home/philip/projects/iot/raspbian/iot-gateway/include/RF24Communicator.h
 	"RF24.h"
 	<ICommunicator.h>
 
-1481398139 /home/philip/projects/iot/raspbian/iot-gateway/include/ICommunicator.h
+1481400134 /home/philip/projects/iot/raspbian/iot-gateway/include/ICommunicator.h
 	"payload.h"
 	"deviceinfo.h"
 
-1481398765 source:/home/philip/projects/iot/raspbian/iot-gateway/src/RF24Communicator.cpp
+1481400181 source:/home/philip/projects/iot/raspbian/iot-gateway/src/RF24Communicator.cpp
 	<stdexcept>
-	<cstdarg>
 	"RF24Communicator.h"
 

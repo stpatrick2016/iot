@@ -14,7 +14,7 @@ class RF24Communicator : public ICommunicator
 
         void initialize();
         bool read(Payload* pPayload);
-        void connectRead(int count, ...);
+        void connectRead(vn_pipe_id* pipes, int count);
         void connectWrite(vn_pipe_id pipe);
 
     protected:
