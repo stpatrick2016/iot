@@ -1,3 +1,5 @@
+#include <stdexcept>
+#include <cstdarg>
 #include "RF24Communicator.h"
 
 RF24Communicator::RF24Communicator()
@@ -35,10 +37,26 @@ bool RF24Communicator::read(Payload* pPayload)
     return false;
 }
 
-void RF24Communicator::connectRead(vn_pipe_id pipe)
+void RF24Communicator::connectRead(int count, ...)
 {
+    if (count < 1)
+    {
+        throw std::invalid_argument("Count of pipes is too small. Expecting a number between 1 and 5");
+    }
+    if(count > 5)
+    {
+        throw std::invalid_argument("Count of pipes is too large. Expecting a number between 1 and 5");
+    }
+
+    va_list args;
+    va_start(args, count);
     _pRadio->stopListening();
-    _pRadio->openReadingPipe(1, pipe);
+    for(int i=0; i<count; i++)
+    {
+        _pRadio->openReadingPipe(i+1, va_arg(args, vn_pipe_id));
+    }
+
+    va_end(args);
     _pRadio->startListening();
 }
 

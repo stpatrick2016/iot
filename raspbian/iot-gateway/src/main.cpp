@@ -45,6 +45,7 @@ int main()
                 break;
             }
             loop();
+            usleep(100);
         }
     }
     catch(exception& e)

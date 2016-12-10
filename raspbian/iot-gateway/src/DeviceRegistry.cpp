@@ -42,7 +42,7 @@ t_device_id DeviceRegistry::connectNext(ICommunicator* pCommunicator)
         DeviceInfo* pDevice = *_currentlyConnected;
         ret = pDevice->Id;
         pCommunicator->connectWrite(pDevice->remote_pipe);
-        pCommunicator->connectRead(pDevice->local_pipe);
+        pCommunicator->connectRead(1, pDevice->local_pipe);
 
         _currentlyConnected++;
     }
