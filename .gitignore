@@ -36,3 +36,6 @@
 [Rr]elease/
 [Bb]in/
 [Oo]bj/
+
+#CodeBlocks dependencies file
+*.depend
