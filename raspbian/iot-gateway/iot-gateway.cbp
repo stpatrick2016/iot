@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -29,10 +30,26 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="include/DeviceRegistry.h" />
+		<Unit filename="include/ICommunicator.h" />
+		<Unit filename="include/RF24.h" />
+		<Unit filename="include/RF24Communicator.h" />
+		<Unit filename="include/RF24_config.h" />
+		<Unit filename="include/bcm2835.h" />
+		<Unit filename="include/deviceinfo.h" />
+		<Unit filename="include/nRF24L01.h" />
+		<Unit filename="include/payload.h" />
+		<Unit filename="src/DeviceRegistry.cpp" />
+		<Unit filename="src/RF24.cpp" />
+		<Unit filename="src/RF24Communicator.cpp" />
+		<Unit filename="src/bcm2835.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
