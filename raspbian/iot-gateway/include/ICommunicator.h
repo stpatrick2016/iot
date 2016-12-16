@@ -9,6 +9,7 @@ class ICommunicator
     public:
         virtual void initialize() = 0;
         virtual bool read(Payload* pPayload) = 0;
+        virtual bool write(Payload* payload) = 0;
         virtual void connectRead(vn_pipe_id* pipes, int count) = 0;
         virtual void connectWrite(vn_pipe_id pipe) = 0;
 };

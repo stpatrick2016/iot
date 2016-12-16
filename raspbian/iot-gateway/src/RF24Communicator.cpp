@@ -24,6 +24,7 @@ void RF24Communicator::initialize()
     _pRadio->setAutoAck(1);
     //_pRadio->startListening();
     _pRadio->printDetails();
+    //_pRadio->powerUp();
 }
 
 bool RF24Communicator::read(Payload* pPayload)
@@ -34,6 +35,14 @@ bool RF24Communicator::read(Payload* pPayload)
         return true;
     }
     return false;
+}
+
+bool RF24Communicator::write(Payload* payload)
+{
+    _pRadio->stopListening();
+    bool ret = _pRadio->write(payload, sizeof(*payload));
+    _pRadio->startListening();
+    return ret;
 }
 
 void RF24Communicator::connectRead(vn_pipe_id* pipes, int count)
@@ -59,5 +68,6 @@ void RF24Communicator::connectRead(vn_pipe_id* pipes, int count)
 void RF24Communicator::connectWrite(vn_pipe_id pipe)
 {
     _pRadio->openWritingPipe(pipe);
+    _pRadio->printDetails();
 }
 

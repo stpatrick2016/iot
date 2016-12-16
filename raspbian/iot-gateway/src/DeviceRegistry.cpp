@@ -1,8 +1,9 @@
 #include "DeviceRegistry.h"
 
-DeviceRegistry::DeviceRegistry()
+DeviceRegistry::DeviceRegistry(ICommunicator* communicator)
 {
     _currentlyConnected = _devices.begin();
+    _communicator = communicator;
 }
 
 DeviceRegistry::~DeviceRegistry()
@@ -29,7 +30,7 @@ void DeviceRegistry::reset()
     _devices.clear();
 }
 
-t_device_id DeviceRegistry::connectNext(ICommunicator* pCommunicator)
+t_device_id DeviceRegistry::connectNext()
 {
     t_device_id ret = 0;
     if(!_devices.empty())
@@ -50,10 +51,14 @@ t_device_id DeviceRegistry::connectNext(ICommunicator* pCommunicator)
             totalConnected++;
         }
 
-        pCommunicator->connectRead(pipes, totalConnected);
+        _communicator->connectRead(pipes, totalConnected);
 
         _currentlyConnected++;
     }
 
     return ret;
+}
+
+void DeviceRegistry::sendServerAddress(t_device_id deviceId)
+{
 }

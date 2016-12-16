@@ -3,7 +3,10 @@
 
 #include <stdint.h>
 
+#pragma pack(push,1)
 enum PayloadType{
+    DATA_REQUEST,
+    RESPONSE_COMPLETED,
     METEO
 };
 
@@ -20,7 +23,9 @@ struct Payload{
 
     union{
         vn_meteo_t meteo;
+        uint64_t address;
     } data;
 };
+#pragma pack(pop)
 
 #endif // PAYLOAD_H_INCLUDED

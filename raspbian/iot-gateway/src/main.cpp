@@ -4,38 +4,58 @@
 #include <inttypes.h>
 #include "DeviceRegistry.h"
 #include "RF24Communicator.h"
+#include "DeviceSessionRecorder.h"
+#include "AddressPool.h"
 
 using namespace std;
 
-Payload payload = Payload();
-DeviceRegistry devices;
+DeviceRegistry* g_devices = NULL;
 ICommunicator* g_communicator = NULL;
 volatile bool g_continue = true;
+volatile bool g_isVisiting = false;
 
-void signal_handler(int s)
+void signal_ctrlbrk_handler(int s)
 {
-    g_continue = false;
+    if(s == SIGINT)
+    {
+        g_continue = false;
+    }
 }
 
-void loop(void)
+void signal_alarm_handler(int sig)
 {
-    t_device_id deviceId = devices.connectNext(g_communicator);
-    usleep(1000); //wait for buffer to fill up if anything goes there.
-    if(g_communicator->read(&payload))
+    if(sig != SIGALRM || !__sync_bool_compare_and_swap(&g_isVisiting, false, true))
     {
-        printf("packet from %" PRIu64 ": temp %d \n", deviceId, payload.data.meteo.temperature);
+        return; //previous run still not completed
     }
+
+    t_devices_list devices;
+    devices.push_back(new DeviceInfo(1, 0x1234567801LL, 0));
+    //devices.push_back(new DeviceInfo(2, 0xCDEDEDED21LL, 0));
+
+    for(t_devices_list::iterator it = devices.begin(); it != devices.end(); it++)
+    {
+        DeviceInfo* device = *it;
+        DeviceSessionRecorder session(g_communicator, device);
+        session.Record();
+    }
+
+    __sync_bool_compare_and_swap(&g_isVisiting, true, false);
 }
 
 int main()
 {
     int exitCode = 0;
-    signal(SIGINT, signal_handler);
+    signal(SIGINT, signal_ctrlbrk_handler);
+    signal(SIGALRM, signal_alarm_handler);
+
     g_communicator = new RF24Communicator();
+    //g_devices = new DeviceRegistry(g_communicator);
     try
     {
-        devices.loadKnownDevices();
+        //g_devices->loadKnownDevices();
         g_communicator->initialize();
+        //alarm(10);
         while(1)
         {
             if(!g_continue)
@@ -44,7 +64,8 @@ int main()
                 exitCode = 0;
                 break;
             }
-            loop();
+            //loop();
+            signal_alarm_handler(SIGALRM);
             usleep(100);
         }
     }
@@ -59,7 +80,7 @@ int main()
         exitCode = -1;
     }
 
-    devices.reset();
+    delete g_devices;
     delete (RF24Communicator*)g_communicator;
 
     return exitCode;
