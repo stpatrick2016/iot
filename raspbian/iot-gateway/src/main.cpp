@@ -1,3 +1,4 @@
+#include "easylogging++.h"
 #include <iostream>
 #include <unistd.h>
 #include <signal.h>
@@ -7,7 +8,9 @@
 #include "DeviceSessionRecorder.h"
 #include "AddressPool.h"
 
-using namespace std;
+INITIALIZE_EASYLOGGINGPP
+
+//using namespace std;
 
 DeviceRegistry* g_devices = NULL;
 ICommunicator* g_communicator = NULL;
@@ -43,8 +46,15 @@ void signal_alarm_handler(int sig)
     __sync_bool_compare_and_swap(&g_isVisiting, true, false);
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    START_EASYLOGGINGPP(argc, argv);
+    el::Configurations defaultConf;
+    defaultConf.setToDefault();
+    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Info, el::ConfigurationType::ToStandardOutput, "true");
+    el::Loggers::reconfigureLogger("default", defaultConf);
+
     int exitCode = 0;
     signal(SIGINT, signal_ctrlbrk_handler);
     signal(SIGALRM, signal_alarm_handler);

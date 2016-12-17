@@ -3,6 +3,7 @@
 
 #include "DeviceSessionRecorder.h"
 #include "AddressPool.h"
+#include "easylogging++.h"
 
 using namespace std;
 
@@ -36,21 +37,21 @@ bool DeviceSessionRecorder::Record()
         {
             if(data.type == PayloadType::METEO)
             {
-                cout << "Meteo data received. Temp: " << data.data.meteo.temperature << endl;
+                LOG(INFO) << "Meteo data received. Temp: " << data.data.meteo.temperature;
             }
             else if(data.type == PayloadType::RESPONSE_COMPLETED)
             {
-                cout << "Data transmission completed" << endl;
+                LOG(INFO) << "Data transmission completed";
             }
         }
         else
         {
-            cout << "Didn't receive reply from device " << (_device->Id) << endl;
+            LOG(WARNING) << "Didn't receive reply from device " << (_device->Id);
         }
     }
     else
     {
-        cout << "Unable to send data to device " << (_device->Id) << endl;
+        LOG(WARNING) << "Unable to send data to device " << (_device->Id);
     }
 
     AddressPool::Instance().ReleaseAddress(_device->local_pipe);

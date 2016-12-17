@@ -68,6 +68,6 @@ void RF24Communicator::connectRead(vn_pipe_id* pipes, int count)
 void RF24Communicator::connectWrite(vn_pipe_id pipe)
 {
     _pRadio->openWritingPipe(pipe);
-    _pRadio->printDetails();
+    //_pRadio->printDetails();
 }
 

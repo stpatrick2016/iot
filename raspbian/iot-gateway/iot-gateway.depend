@@ -68,7 +68,8 @@
 1481322317 /home/philip/projects/iot/raspbian/iot-gateway/include/deviceinfo.h
 	<stdint.h>
 
-1481930982 source:/home/philip/projects/iot/raspbian/iot-gateway/src/main.cpp
+1481933727 source:/home/philip/projects/iot/raspbian/iot-gateway/src/main.cpp
+	"easylogging++.h"
 	<iostream>
 	<unistd.h>
 	<signal.h>
@@ -113,20 +114,91 @@
 	<stdexcept>
 	"RF24Communicator.h"
 
-1481930927 source:/home/philip/projects/iot/raspbian/iot-gateway/src/DeviceSessionRecorder.cpp
+1481933359 source:/home/philip/projects/iot/raspbian/iot-gateway/src/DeviceSessionRecorder.cpp
 	<unistd.h>
 	<iostream>
 	"DeviceSessionRecorder.h"
 	"AddressPool.h"
+	"easylogging++.h"
 
 1481930919 /home/philip/projects/iot/raspbian/iot-gateway/include/DeviceSessionRecorder.h
 	"ICommunicator.h"
 	"deviceinfo.h"
 
-1481930203 source:/home/philip/projects/iot/raspbian/iot-gateway/src/AddressPool.cpp
+1481932359 source:/home/philip/projects/iot/raspbian/iot-gateway/src/AddressPool.cpp
 	<mutex>
 	"AddressPool.h"
 
 1481930056 /home/philip/projects/iot/raspbian/iot-gateway/include/AddressPool.h
 	"deviceinfo.h"
+
+1469758921 /home/philip/projects/iot/raspbian/iot-gateway/include/easylogging++.h
+	<syslog.h>
+	<ctime>
+	<cstring>
+	<cstdlib>
+	<cctype>
+	<cwchar>
+	<csignal>
+	<cerrno>
+	<cstdarg>
+	<locale>
+	<codecvt>
+	<cxxabi.h>
+	<execinfo.h>
+	<sys/system_properties.h>
+	<sys/stat.h>
+	<sys/time.h>
+	<direct.h>
+	<windows.h>
+	<winsock2.h>
+	<winsock.h>
+	<string>
+	<vector>
+	<map>
+	<utility>
+	<functional>
+	<algorithm>
+	<fstream>
+	<iostream>
+	<sstream>
+	<memory>
+	<type_traits>
+	<mutex>
+	<thread>
+	<pthread.h>
+	<unistd.h>
+	<thread>
+	<queue>
+	<condition_variable>
+	<list>
+	<queue>
+	<deque>
+	<set>
+	<bitset>
+	<stack>
+	<array>
+	<unordered_map>
+	<unordered_set>
+	<QString>
+	<QByteArray>
+	<QVector>
+	<QList>
+	<QPair>
+	<QMap>
+	<QQueue>
+	<QSet>
+	<QLinkedList>
+	<QHash>
+	<QMultiHash>
+	<QStack>
+	<boost/container/vector.hpp>
+	<boost/container/stable_vector.hpp>
+	<boost/container/list.hpp>
+	<boost/container/deque.hpp>
+	<boost/container/map.hpp>
+	<boost/container/flat_map.hpp>
+	<boost/container/set.hpp>
+	<boost/container/flat_set.hpp>
+	<wx/vector.h>
 
